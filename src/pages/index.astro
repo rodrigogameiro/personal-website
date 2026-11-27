@@ -1,0 +1,187 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Contact from '../components/Contact.astro';
+import EmailLink from '../components/EmailLink.astro';
+import Icon from '../components/Icon.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import WorkTheme from '../components/WorkTheme.astro';
+import headshot from '../assets/headshot.jpg';
+import { bio, person, primaryEmail, profiles } from '../data/profile';
+import { workThemes } from '../data/projects';
+import { getFeaturedPublications } from '../lib/publications';
+import { homeGraph } from '../lib/schema';
+import { portraitPath, portraitRatios, portraitSize, type PortraitRatio } from '../lib/portrait';
+import { absoluteUrl } from '../lib/site';
+
+// Name first: the query this page must win is the name itself.
+const title = `${person.name}, ${person.credentials} · Clinical AI · ${person.institution}`;
+const description = bio.description;
+
+const featured = await getFeaturedPublications();
+
+const schema = homeGraph({
+  base: absoluteUrl('/', Astro.site),
+  pageTitle: title,
+  images: await Promise.all(
+    (Object.keys(portraitRatios) as PortraitRatio[]).map(async (ratio) => ({
+      url: absoluteUrl(portraitPath(ratio), Astro.site),
+      ...(await portraitSize(ratio)),
+    })),
+  ),
+});
+
+const chips = profiles.filter((p) => p.primary);
+---
+
+<BaseLayout title={title} description={description} ogType="profile" schema={schema}>
+  <section class="hero" aria-labelledby="name">
+    <div class="portrait">
+      <Picture
+        src={headshot}
+        alt={`Portrait of ${person.name}`}
+        width={112}
+        widths={[112, 224, 336]}
+        sizes="112px"
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <h1 id="name" class="name">
+      {person.name}
+      <span class="credentials">, {person.credentials}</span>
+    </h1>
+    <p class="affiliation">
+      {person.jobTitle}, {person.department}, {person.institution}
+    </p>
+    <ul class="chips" aria-label="Contact and profiles">
+      <li>
+        <EmailLink address={primaryEmail.address} class="chip glass" label={`Email ${person.name}`}>
+          <Icon name="mail" size={17} />
+          <span>Email</span>
+        </EmailLink>
+      </li>
+      {chips.map((profile) => (
+        <li>
+          <a class="chip glass" href={profile.url} rel="me">
+            <Icon name={profile.id} size={16} />
+            <span>{profile.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <h2 class="section-label" id="about-title">
+      About
+    </h2>
+    <div class="prose">
+      {bio.home.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-title">
+    <h2 class="section-label" id="work-title">
+      Current work
+    </h2>
+    <div class="themes">
+      {workThemes.map((theme) => (
+        <WorkTheme theme={theme} />
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="publications" aria-labelledby="publications-title">
+    <h2 class="section-label" id="publications-title">
+      Selected publications
+    </h2>
+    <ol class="pub-list">
+      {featured.map((pub) => (
+        <PublicationItem pub={pub} />
+      ))}
+    </ol>
+    <a class="more-link" href="/publications/">
+      All publications
+      <Icon name="arrow-right" size={16} />
+    </a>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <h2 class="section-label" id="contact-title">
+      Contact
+    </h2>
+    <Contact />
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: clamp(0.5rem, 3vw, 1.5rem);
+  }
+
+  .portrait {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 1.75rem;
+    padding: 4px;
+    border-radius: 50%;
+    background: var(--glass-fill);
+    box-shadow:
+      inset 0 0 0 1px var(--glass-rim-hi),
+      0 0 0 1px var(--glass-stroke),
+      var(--glass-shadow);
+  }
+
+  .portrait :global(img) {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 18%;
+  }
+
+  .name {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 1.6rem + 4.6vw, 4.25rem);
+    font-weight: 450;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .credentials {
+    color: var(--muted);
+    font-size: 0.5em;
+    font-weight: 400;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .affiliation {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    list-style: none;
+  }
+
+  .themes {
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  .pub-list {
+    list-style: none;
+  }
+</style>

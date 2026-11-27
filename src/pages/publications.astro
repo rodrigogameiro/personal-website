@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import { person, profiles } from '../data/profile';
+import { getPublications } from '../lib/publications';
+import { pageGraph, publicationList } from '../lib/schema';
+import { absoluteUrl } from '../lib/site';
+
+const title = `Publications · ${person.name}`;
+// Kept under ~155 characters so search results show it whole.
+const description = `Papers and preprints by ${person.name}, ${person.credentials}, on evaluating clinical AI, bias in health data, hallucination in medical AI and AI in medical education.`;
+
+const all = await getPublications();
+const sections = [
+  {
+    id: 'clinical-ai',
+    title: 'Clinical AI',
+    items: all.filter((p) => p.section === 'clinical-ai'),
+  },
+  {
+    id: 'under-review',
+    title: 'Under review',
+    items: all.filter((p) => p.section === 'under-review'),
+  },
+  {
+    id: 'clinical',
+    title: 'Clinical case reports and reviews',
+    note: 'Case reports and a systematic review, mostly in ophthalmology, from medical school onwards.',
+    items: all.filter((p) => p.section === 'clinical'),
+  },
+];
+
+const base = absoluteUrl('/', Astro.site);
+const pageUrl = absoluteUrl(Astro.url.pathname, Astro.site);
+const schema = pageGraph({
+  base,
+  url: pageUrl,
+  pageTitle: title,
+  description,
+  type: 'CollectionPage',
+  // In the order the page shows them.
+  mainEntity: publicationList(
+    sections.flatMap((section) => section.items),
+    { base, pageUrl },
+  ),
+});
+
+const scholar = profiles.find((p) => p.id === 'scholar');
+const orcid = profiles.find((p) => p.id === 'orcid');
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <header class="page-header">
+    <h1 class="page-title">Publications</h1>
+    <p class="page-intro">
+      Peer-reviewed papers and preprints, newest first. Each entry gives the author list as
+      published.
+    </p>
+    <ul class="chips" aria-label="Publication profiles">
+      {[scholar, orcid].map(
+        (profile) =>
+          profile && (
+            <li>
+              <a class="chip glass" href={profile.url}>
+                <Icon name={profile.id} size={16} />
+                <span>{profile.label}</span>
+              </a>
+            </li>
+          ),
+      )}
+    </ul>
+  </header>
+
+  {sections.map(
+    (section) =>
+      section.items.length > 0 && (
+        <section class="section" id={section.id} aria-labelledby={`${section.id}-title`}>
+          <h2 class="section-label" id={`${section.id}-title`}>
+            {section.title}
+          </h2>
+          {section.note && <p class="section-note">{section.note}</p>}
+          <ol class="pub-list">
+            {section.items.map((pub) => (
+              <PublicationItem pub={pub} summary />
+            ))}
+          </ol>
+        </section>
+      ),
+  )}
+</BaseLayout>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    list-style: none;
+  }
+
+  .section-note {
+    margin-top: -0.75rem;
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .pub-list {
+    list-style: none;
+  }
+</style>

@@ -1,0 +1,20 @@
+// Cloudflare Workers static assets: serves the built site (dist/) at its one
+// canonical origin, https://rodrigogameiro.com (set in astro.config.mjs).
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "personal-website",
+  "compatibility_date": "2026-11-26",
+  // Deploying attaches the domain and creates its DNS record and certificate.
+  "routes": [{ "pattern": "rodrigogameiro.com", "custom_domain": true }],
+  // No second public copy of the site: no workers.dev address, no preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    // Unknown paths get dist/404.html with a real 404 status.
+    "not_found_handling": "404-page",
+    // /publications redirects to /publications/ (a 307; public/_redirects makes
+    // it a 301), matching trailingSlash: 'always'.
+    "html_handling": "auto-trailing-slash",
+  },
+}

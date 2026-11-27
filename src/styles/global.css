@@ -1,0 +1,513 @@
+/* ==========================================================================
+   Rodrigo Gameiro — global styles
+   Tokens, base elements, layout primitives and the glass material.
+   Component-specific styles live next to each component.
+   ========================================================================== */
+
+/* ---------- Tokens ------------------------------------------------------- */
+
+:root {
+  color-scheme: light dark;
+
+  /* Typefaces (the --font-* variables are emitted by Astro's Fonts API). */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  /* Color. light-dark() follows color-scheme: the system setting, or the theme switch. */
+  --bg: light-dark(oklch(0.985 0.004 255), oklch(0.165 0.012 265));
+  --fg: light-dark(oklch(0.22 0.014 260), oklch(0.955 0.006 265));
+  --fg-soft: light-dark(oklch(0.34 0.014 260), oklch(0.86 0.008 265));
+  --muted: light-dark(oklch(0.47 0.012 260), oklch(0.72 0.012 265));
+  --hairline: light-dark(oklch(0.22 0.02 260 / 0.1), oklch(1 0 0 / 0.1));
+  --accent: light-dark(oklch(0.49 0.15 256), oklch(0.8 0.1 248));
+  --accent-soft: light-dark(oklch(0.49 0.15 256 / 0.1), oklch(0.8 0.1 248 / 0.14));
+  /* Text on tinted pills, which can sit over the ambient light: one step darker. */
+  --accent-strong: light-dark(oklch(0.42 0.15 258), oklch(0.84 0.09 248));
+  --focus: light-dark(oklch(0.55 0.17 256), oklch(0.82 0.11 248));
+  --selection: light-dark(oklch(0.85 0.07 250), oklch(0.42 0.1 255));
+
+  /* Ambient light behind the page (seen through the glass). */
+  --aurora-1: light-dark(oklch(0.86 0.085 240 / 0.6), oklch(0.42 0.11 255 / 0.42));
+  --aurora-2: light-dark(oklch(0.89 0.07 300 / 0.5), oklch(0.4 0.11 300 / 0.32));
+  --aurora-3: light-dark(oklch(0.91 0.065 185 / 0.42), oklch(0.45 0.08 190 / 0.24));
+
+  /*
+   * Glass material.
+   * The nav floats over arbitrary content, so its fill is dense enough for
+   * full-strength text to keep >= 4.5:1 even over pure black or white.
+   * Chips and cards sit over the known, soft background and can be lighter.
+   */
+  --glass-fill: light-dark(rgb(255 255 255 / 0.55), rgb(44 46 54 / 0.5));
+  --glass-fill-nav: light-dark(rgb(255 255 255 / 0.64), rgb(30 31 37 / 0.74));
+  --glass-sheen: light-dark(rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.05));
+  --glass-current: light-dark(rgb(255 255 255 / 0.94), rgb(255 255 255 / 0.15));
+  --glass-hover: light-dark(rgb(20 24 40 / 0.05), rgb(255 255 255 / 0.08));
+  --glass-solid: light-dark(#fbfbfc, #1b1c21);
+  --glass-stroke: light-dark(rgb(20 24 40 / 0.08), rgb(255 255 255 / 0.1));
+  --glass-rim-hi: light-dark(rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.32));
+  --glass-rim-lo: light-dark(rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.06));
+  --glass-shadow:
+    0 1px 2px light-dark(rgb(20 24 40 / 0.06), rgb(0 0 0 / 0.35)),
+    0 10px 30px -12px light-dark(rgb(20 24 40 / 0.18), rgb(0 0 0 / 0.55));
+
+  /* Rhythm. */
+  --measure: 42rem;
+  --gutter: clamp(1.25rem, 4.5vw, 2rem);
+  --radius-pill: 999px;
+  --radius-card: 1.375rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * The theme script in BaseLayout sets data-theme on <html> (the saved choice
+ * from the switch, else the system setting). Without JavaScript, the system
+ * setting applies through color-scheme: light dark above.
+ */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* ---------- Base --------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 6rem;
+  hanging-punctuation: first;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.06em;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 150ms ease;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* ---------- Ambient background ------------------------------------------ */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(56rem 34rem at 8% -12%, var(--aurora-1), transparent 62%),
+    radial-gradient(48rem 30rem at 92% -6%, var(--aurora-2), transparent 60%),
+    radial-gradient(44rem 26rem at 48% 108%, var(--aurora-3), transparent 64%);
+}
+
+/* A whisper of grain keeps the gradients from banding on wide displays. */
+.ambient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Layout ------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main {
+  display: block;
+  padding-block: clamp(6.5rem, 14vw, 8.5rem) clamp(3rem, 8vw, 5rem);
+}
+
+.section {
+  margin-top: clamp(3.5rem, 9vw, 5rem);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.prose > * + * {
+  margin-top: 1.05em;
+}
+
+.prose {
+  color: var(--fg-soft);
+}
+
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.more-link .icon {
+  transition: transform 200ms var(--ease-out);
+}
+
+.more-link:hover .icon {
+  transform: translateX(3px);
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.page-intro {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+/* ---------- Glass material ---------------------------------------------- */
+/*
+ * Modelled on Apple's "regular" Liquid Glass, in plain CSS:
+ *   - a translucent fill with a soft top sheen;
+ *   - a 1px specular rim (::after), brighter where the light falls;
+ *   - a hairline edge and a soft shadow so the surface floats.
+ * Only the nav uses a real backdrop-filter (.glass--blur): it is the one surface
+ * that content scrolls beneath. Chips and cards sit over a soft, static
+ * gradient where a blur would be invisible, so they skip the filter pass.
+ * backdrop-filter values are literal on purpose: WebKit drops var() inside it.
+ * Refraction (SVG displacement) is deliberately not used: Safari and Firefox
+ * discard the whole filter when it is present.
+ */
+
+@property --glass-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 160deg;
+}
+
+.glass {
+  position: relative;
+  background-color: var(--glass-fill);
+  background-image: linear-gradient(180deg, var(--glass-sheen), transparent 60%);
+  border: 1px solid var(--glass-stroke);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  corner-shape: inherit;
+  background: linear-gradient(
+      var(--glass-angle),
+      var(--glass-rim-hi),
+      transparent 35% 65%,
+      var(--glass-rim-lo)
+    )
+    border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.glass--blur {
+  background-color: var(--glass-fill-nav);
+  -webkit-backdrop-filter: blur(14px) saturate(175%);
+  backdrop-filter: blur(14px) saturate(175%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glass::after {
+    transition: --glass-angle 600ms ease;
+  }
+  .glass:is(:hover, :focus-within)::after {
+    --glass-angle: 205deg;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass--blur {
+    background-color: var(--glass-solid);
+  }
+}
+
+/* Fallbacks and preferences (keep last). */
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass--blur {
+    background-color: var(--glass-solid);
+    background-image: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .ambient {
+    display: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .glass,
+  .glass--blur {
+    color: light-dark(#000, #fff);
+    background-color: light-dark(#fff, #000);
+    background-image: none;
+    border-color: currentColor;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass::after {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .glass,
+  .glass--blur {
+    background-color: Canvas;
+    background-image: none;
+    border-color: CanvasText;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass::after,
+  .ambient {
+    display: none;
+  }
+}
+
+/* ---------- Chips (glass pills with an icon and a label) ----------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.95rem 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    transform 250ms var(--ease-out),
+    box-shadow 250ms var(--ease-out);
+}
+
+.chip .icon {
+  flex: none;
+  color: var(--fg-soft);
+}
+
+@media (hover: hover) {
+  .chip:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.chip:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Page transitions (native, no JavaScript) --------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
+  }
+}
+
+/* ---------- Print -------------------------------------------------------- */
+
+@page {
+  margin: 16mm 15mm;
+}
+
+@media print {
+  /* Paper is always light, whatever the theme switch says. */
+  :root,
+  :root[data-theme] {
+    color-scheme: light;
+    /* Everything is sized in rem, so this scales the whole page for paper. */
+    font-size: 9.5pt;
+    --bg: #fff;
+    --fg: #000;
+    --fg-soft: #000;
+    --muted: #444;
+    --accent: #000;
+    --accent-strong: #000;
+  }
+  body {
+    line-height: 1.45;
+  }
+  .ambient,
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+  .glass,
+  .glass--blur {
+    background: none;
+    border-color: #ccc;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  .glass::after {
+    display: none;
+  }
+  main {
+    padding-block: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .section {
+    margin-top: 1.5rem;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  li,
+  article {
+    break-inside: avoid;
+  }
+}

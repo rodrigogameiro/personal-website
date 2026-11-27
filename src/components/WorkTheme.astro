@@ -1,0 +1,129 @@
+---
+import Icon from './Icon.astro';
+import type { WorkTheme } from '../data/projects';
+
+interface Props {
+  theme: WorkTheme;
+}
+
+const { theme } = Astro.props;
+const paired = theme.projects.length === 2;
+---
+
+<section class:list={['theme', `theme--${theme.tone}`]} aria-labelledby={`${theme.id}-title`}>
+  <h3 class="theme-title" id={`${theme.id}-title`}>
+    <span class="theme-icon">
+      <Icon name={theme.icon} size={20} />
+    </span>
+    {theme.title}
+  </h3>
+  <div class:list={['theme-projects', { 'theme-projects--pair': paired }]}>
+    {theme.projects.map((project) => (
+      <article class="project glass" aria-labelledby={`${project.id}-title`}>
+        <h4 class="project-title" id={`${project.id}-title`}>
+          {project.title}
+        </h4>
+        <p class="project-body">{project.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  /*
+   * A research theme: its name beside a tinted icon tile, then one glass tile
+   * per project. Two projects sit side by side from 40rem. Each theme borrows a
+   * hue from the ambient light behind the page, used for the icon tile and a
+   * faint glow in the corner of its tiles.
+   */
+  .theme {
+    --tone: light-dark(oklch(0.5 0.15 256), oklch(0.8 0.1 250));
+    --tone-soft: light-dark(oklch(0.5 0.15 256 / 0.1), oklch(0.8 0.1 250 / 0.14));
+  }
+
+  .theme--violet {
+    --tone: light-dark(oklch(0.5 0.16 300), oklch(0.8 0.1 305));
+    --tone-soft: light-dark(oklch(0.5 0.16 300 / 0.1), oklch(0.8 0.1 305 / 0.14));
+  }
+
+  .theme--teal {
+    --tone: light-dark(oklch(0.5 0.09 195), oklch(0.82 0.08 190));
+    --tone-soft: light-dark(oklch(0.5 0.09 195 / 0.11), oklch(0.82 0.08 190 / 0.14));
+  }
+
+  .theme-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .theme-icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.75rem;
+    background: var(--tone-soft);
+    color: var(--tone);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--tone) 18%, transparent);
+  }
+
+  .theme-projects {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project {
+    padding: clamp(1.25rem, 3.5vw, 1.625rem);
+    border-radius: var(--radius-card);
+    background-image:
+      radial-gradient(140% 100% at 0% 0%, var(--tone-soft), transparent 55%),
+      linear-gradient(180deg, var(--glass-sheen), transparent 60%);
+  }
+
+  @supports (corner-shape: squircle) {
+    .project {
+      corner-shape: squircle;
+      border-radius: 2rem;
+    }
+  }
+
+  .project-title {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .project-body {
+    margin-top: 0.5rem;
+    color: var(--fg-soft);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 40rem) {
+    .theme-projects--pair {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* The global glass fallbacks drop gradients; keep the tiles plain there too. */
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
+    .project {
+      background-image: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .theme-icon {
+      border: 1px solid CanvasText;
+    }
+  }
+</style>

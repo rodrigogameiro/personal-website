@@ -1,0 +1,6 @@
+# Redirects applied by Cloudflare Workers static assets.
+# Each page lives at a URL ending in "/" (trailingSlash: 'always'). Cloudflare's
+# automatic redirect from the slash-less form is a 307 (temporary); these make it
+# a 301, so search engines treat the slash form as the only address. Add a line
+# here for every new page.
+/publications /publications/ 301

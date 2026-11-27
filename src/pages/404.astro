@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { person } from '../data/profile';
+---
+
+<BaseLayout
+  title={`Page not found · ${person.name}`}
+  description="This page does not exist."
+  noindex
+>
+  <div class="not-found">
+    <p class="code">404</p>
+    <h1 class="page-title">This page does not exist</h1>
+    <p class="page-intro">
+      The link may be out of date. Everything on this site is one step from the home page.
+    </p>
+    <a class="more-link" href="/">
+      Go to the home page
+      <Icon name="arrow-right" size={16} />
+    </a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: clamp(2rem, 8vw, 5rem);
+  }
+
+  .code {
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+</style>

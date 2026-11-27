@@ -1,0 +1,111 @@
+---
+import EmailLink from './EmailLink.astro';
+import Icon from './Icon.astro';
+import { emails, profiles } from '../data/profile';
+---
+
+<div class="contact">
+  <div class="contact-group">
+    <h3 class="contact-heading">Email</h3>
+    <dl class="emails">
+      {emails.map((email) => (
+        <div class="email-row">
+          <dt>{email.label}</dt>
+          <dd>
+            <EmailLink address={email.address} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  <div class="contact-group">
+    <h3 class="contact-heading">Elsewhere</h3>
+    <ul class="profiles">
+      {profiles.map((profile) => (
+        <li>
+          <a class="profile" href={profile.url} rel="me">
+            <Icon name={profile.id} size={16} />
+            <span>{profile.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .contact {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 40rem) {
+    .contact {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .contact-heading {
+    margin-bottom: 0.6rem;
+    color: var(--fg);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .emails {
+    margin: 0;
+  }
+
+  .email-row {
+    display: grid;
+    grid-template-columns: 4.75rem 1fr;
+    gap: 0.75rem;
+    padding-block: 0.45rem;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.9375rem;
+  }
+
+  .email-row:first-child {
+    border-top: 0;
+  }
+
+  .email-row dt {
+    color: var(--muted);
+  }
+
+  .email-row dd {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .profiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1rem;
+    list-style: none;
+  }
+
+  .profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2.25rem;
+    color: var(--fg-soft);
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .profile .icon {
+    flex: none;
+    color: var(--muted);
+    transition: color 150ms ease;
+  }
+
+  .profile:hover,
+  .profile:hover .icon {
+    color: var(--fg);
+  }
+</style>

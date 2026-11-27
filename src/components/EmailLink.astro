@@ -1,0 +1,29 @@
+---
+/**
+ * A mailto link whose address is written as HTML entities, so it reads normally
+ * for people and screen readers but not for the plainest address harvesters.
+ * Note: the anchor is emitted as raw HTML, so style it with global classes.
+ */
+import { escapeAttribute, toEntities } from '../lib/obfuscate';
+
+interface Props {
+  address: string;
+  class?: string;
+  /** Accessible name, when the visible content is not the address itself. */
+  label?: string;
+}
+
+const { address, class: className, label } = Astro.props;
+const inner = Astro.slots.has('default')
+  ? await Astro.slots.render('default')
+  : toEntities(address);
+const attrs = [
+  className ? `class="${escapeAttribute(className)}"` : '',
+  `href="${toEntities(`mailto:${address}`)}"`,
+  label ? `aria-label="${escapeAttribute(label)}"` : '',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<Fragment set:html={`<a ${attrs}>${inner}</a>`} />

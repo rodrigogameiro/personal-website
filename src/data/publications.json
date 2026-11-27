@@ -1,0 +1,276 @@
+[
+  {
+    "id": "data-artifacts-glossary-2025",
+    "title": "The Data Artifacts Glossary: a community-based repository for bias on health datasets",
+    "authors": "Gameiro RR, Woite NL, Sauer CM, Hao S, Fernandes CO, Premo AE, Teixeira AR, Resli I, Wong AI, Celi LA",
+    "kind": "Journal article",
+    "section": "clinical-ai",
+    "featured": 1,
+    "venue": "Journal of Biomedical Science",
+    "citation": "32(1):14",
+    "year": 2025,
+    "date": "2025-02-04",
+    "doi": "10.1186/s12929-024-01106-6",
+    "pmid": "39901158",
+    "links": [
+      {
+        "label": "Glossary",
+        "url": "https://github.com/MIT-LCP/the-bias-glossary/wiki"
+      }
+    ],
+    "summary": "An open-source, community-maintained repository that documents known biases in health datasets, piloted on MIMIC-IV."
+  },
+  {
+    "id": "cxr-exposure-parameters-2026",
+    "title": "Impact of Exposure Parameters on Deep Learning Models in Chest Radiography and Implications for Deployment",
+    "authors": "Shu HJ, Chang ST, Gameiro RR, Gichoya JW, Celi LA, Kuo PC",
+    "kind": "Journal article",
+    "section": "clinical-ai",
+    "featured": 2,
+    "venue": "Radiology: Artificial Intelligence",
+    "citation": "8(4):e250731",
+    "year": 2026,
+    "date": "2026-06-24",
+    "doi": "10.1148/ryai.250731",
+    "pmid": "42340188",
+    "summary": "Shows that chest-radiograph models can use X-ray exposure settings as a shortcut: a pneumothorax model's AUC fell from 0.94 to 0.56 when the link between exposure settings and labels was reversed."
+  },
+  {
+    "id": "medical-hallucinations-2025",
+    "title": "Medical Hallucinations in Foundation Models and Their Impact on Healthcare",
+    "authors": "Kim Y, Jeong H, Chen S, Li SS, Lu M, Alhamoud K, Mun J, Grau C, Jung M, Gameiro R, et al.",
+    "kind": "Preprint",
+    "section": "clinical-ai",
+    "featured": 3,
+    "venue": "arXiv preprint",
+    "citation": "arXiv:2503.05777",
+    "year": 2025,
+    "date": "2025-02-26",
+    "doi": "10.48550/arXiv.2503.05777",
+    "links": [
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2503.05777"
+      }
+    ],
+    "summary": "A taxonomy and benchmark of hallucination in medical foundation models, with a survey of clinicians."
+  },
+  {
+    "id": "ai-competencies-meded-2026",
+    "title": "What the AI era doctor should know: a scoping review of proposed artificial intelligence competencies for medical education",
+    "authors": "Hunt VM, Sprehe LK, de Lomba WC, Gameiro RR, Woite NL, Wade CG, Chen JH, Rougas SC, Fraser HSF, Sullivan AM, Fregni F",
+    "kind": "Review",
+    "section": "clinical-ai",
+    "featured": 4,
+    "venue": "npj Digital Medicine",
+    "citation": "9(1)",
+    "year": 2026,
+    "date": "2026-05-12",
+    "doi": "10.1038/s41746-026-02761-9",
+    "pmid": "42120544",
+    "summary": "A scoping review of 54 studies that organizes proposed AI competencies for medical students into seven domains, 37 competencies and 170 learning objectives."
+  },
+  {
+    "id": "ai-critical-care-2025",
+    "title": "Understanding artificial intelligence in critical care: opportunities, risks, and practical applications",
+    "authors": "Woite NL, Gameiro RR, Leite M, Hammond A, Cobanaj M, Celi LA",
+    "kind": "Review",
+    "section": "clinical-ai",
+    "featured": 5,
+    "venue": "Critical Care Science",
+    "citation": "37:e20250380",
+    "year": 2025,
+    "date": "2025-08-18",
+    "doi": "10.62675/2965-2774.20250380",
+    "pmid": "40834168",
+    "summary": "A narrative review of the benefits, risks and practical use of AI in critical care, including bias and environmental cost."
+  },
+  {
+    "id": "ai-bias-to-ai-by-us-2026",
+    "title": "From AI Bias to AI by Us: A Case Study from MIT Critical Data",
+    "authors": "Bielick C, Gameiro R, Celi L",
+    "kind": "Book chapter",
+    "section": "clinical-ai",
+    "featured": 6,
+    "venue": "AI from the Global Majority",
+    "citation": "Belli L, Gaspar WB (eds.). Springer, 159–166",
+    "year": 2026,
+    "date": "2026-04-01",
+    "doi": "10.1007/978-3-032-07830-8_17",
+    "summary": "A case study of MIT Critical Data's approach to medical AI, in the outcome volume of the UN Internet Governance Forum's coalition on data and AI governance."
+  },
+  {
+    "id": "llm-chatbots-engagement-2025",
+    "title": "Perspective on patient and non-academic partner engagement for the responsible integration of large language models in health chatbots",
+    "authors": "Jaiswal N, Ma Y, Lebouché B, Poenaru D, Pomey MP, Achiche S, Lessard D, Engler K, Montiel Z, Acevedo H, Gameiro RR, Celi LA, Osmanlliu E",
+    "kind": "Journal article",
+    "section": "clinical-ai",
+    "venue": "Research Involvement and Engagement",
+    "citation": "11(1):143",
+    "year": 2025,
+    "date": "2025-12-22",
+    "doi": "10.1186/s40900-025-00804-1",
+    "pmid": "41430630",
+    "summary": "How patients and non-academic partners can shape the design and oversight of LLM health chatbots."
+  },
+  {
+    "id": "beyond-ethics-2025",
+    "title": "Beyond Ethics: How Inclusive Innovation Drives Economic Returns in Medical AI",
+    "authors": "Unnikrishnan B, Guerra Adames A, Adibi A, Peesapati S, Kocielnik R, Fischer S, Kasimbazi HC, Gameiro R, Peluso A, Fernandes CO, Lange M, Gondara L, Celi LA",
+    "kind": "Preprint",
+    "section": "clinical-ai",
+    "venue": "arXiv preprint",
+    "citation": "arXiv:2510.10338",
+    "year": 2025,
+    "date": "2025-10-11",
+    "doi": "10.48550/arXiv.2510.10338",
+    "links": [
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2510.10338"
+      }
+    ],
+    "summary": "A perspective arguing that medical AI built for diverse and resource-constrained settings also pays off commercially."
+  },
+  {
+    "id": "red-teaming-genai-2025",
+    "title": "Red Teaming for Generative AI, Report on a Copyright-Focused Exercise Completed in an Academic Medical Center",
+    "authors": "Wen J, Nalawade S, Liang Z, Bielick C, Boston MF, Chowdhury A, Collin A, De Angelis L, Ellen J, Frase H, Gameiro RR, et al.",
+    "kind": "Preprint",
+    "section": "clinical-ai",
+    "venue": "arXiv preprint",
+    "citation": "arXiv:2506.22523",
+    "year": 2025,
+    "date": "2025-06-26",
+    "doi": "10.48550/arXiv.2506.22523",
+    "links": [
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2506.22523"
+      }
+    ],
+    "summary": "Report of a red-teaming exercise that tested an academic medical center's internal generative AI tool for copyright leakage."
+  },
+  {
+    "id": "who-leads-medical-ai-2026",
+    "title": "Who is leading medical AI? A systematic review and scientometric analysis of chest x-ray research",
+    "authors": "Vásquez-Venegas C, Chewcharat A, Kimera R, …, Gameiro R, Celi LA",
+    "kind": "Preprint",
+    "section": "clinical-ai",
+    "venue": "medRxiv",
+    "citation": "2026.04.02.26349884",
+    "year": 2026,
+    "date": "2026-04-07",
+    "doi": "10.64898/2026.04.02.26349884"
+  },
+  {
+    "id": "sakshi-colm-2026",
+    "title": "SAKSHI: A Community-Operated Investigative Platform for Accountability in Clinical AI Deployment",
+    "authors": "AL-Louzi R, Ali HN, Coleman Bank AM, Celi LA, Cocucci C, Gameiro RR, et al.",
+    "kind": "Workshop poster",
+    "section": "clinical-ai",
+    "venue": "COLM 2026 Workshop on Deploying AI in Healthcare (DAIH)",
+    "year": 2026,
+    "date": "2026-10-09",
+    "summary": "A platform for investigating failures of deployed clinical AI."
+  },
+  {
+    "id": "paint-under-review",
+    "title": "PAINT: A Framework for Multilingual Pain Representation from Medical Licensing Exams to Real-World Clinical Texts",
+    "authors": "Zhang B, Ma Y, Wu J, Han A, Yamamoto R, Gameiro RR, Placino SKV, Jaiswal N, Leite M, Pineda Moreno JA, Chaisutyakorn K, Huang C-Y, Jia Y, Yang J, Celi LA, Teodoro D",
+    "kind": "Manuscript",
+    "section": "under-review",
+    "venue": "Manuscript under review",
+    "year": 2026,
+    "date": "2026-11-01"
+  },
+  {
+    "id": "syphilitic-ocular-2025",
+    "title": "A rare syphilitic ocular manifestation",
+    "authors": "Gameiro RR, Godoy R, da Costa DS, Medina FMC, Gameiro Filho AR",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "The Pan-American Journal of Ophthalmology",
+    "citation": "7(1):158",
+    "year": 2025,
+    "date": "2025-06-01",
+    "doi": "10.4103/pajo.pajo_11_25"
+  },
+  {
+    "id": "radius-maumenee-2024",
+    "title": "Radius-Maumenee syndrome (idiopathic dilated episcleral vessels)",
+    "authors": "Estacia CT, Gameiro Filho AR, da Silveira IBE, Da Cas ME, Gameiro RR",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "GMS Ophthalmology Cases",
+    "citation": "14:Doc15",
+    "year": 2024,
+    "date": "2024-12-03",
+    "doi": "10.3205/oc000247",
+    "pmid": "39811492"
+  },
+  {
+    "id": "adhd-vr-systematic-review-2023",
+    "title": "Effect of Video Games or Virtual Reality in Reducing Symptoms of Cognitive Deficits in Children and Adolescents with ADHD: A Systematic Review",
+    "authors": "Ambrosio L, Marian S, Gameiro RR, Mohammed TO, Couto Moreira AP, et al.",
+    "kind": "Systematic review",
+    "section": "clinical",
+    "venue": "Principles and Practice of Clinical Research",
+    "citation": "9(1)",
+    "year": 2023,
+    "date": "2023-07-10",
+    "doi": "10.21801/ppcrj.2023.91.4"
+  },
+  {
+    "id": "melkersson-rosenthal-2022",
+    "title": "Melkersson-Rosenthal syndrome: a rare variant of the monosymptomatic form",
+    "authors": "Estacia CT, Gameiro Filho AR, da Silveira IBE, Gameiro RR, Della Barba ALS",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "GMS Ophthalmology Cases",
+    "citation": "12:Doc04",
+    "year": 2022,
+    "date": "2022-02-08",
+    "doi": "10.3205/oc000191",
+    "pmid": "35291587"
+  },
+  {
+    "id": "sporotrichosis-2020",
+    "title": "Ocular and cutaneous sporotrichosis",
+    "authors": "Gameiro Filho AR, Estacia CT, Gameiro RR, de Mattos Fonseca Vieira L, Socci da Costa D",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "American Journal of Ophthalmology Case Reports",
+    "citation": "20:100885",
+    "year": 2020,
+    "date": "2020-08-20",
+    "doi": "10.1016/j.ajoc.2020.100885",
+    "pmid": "32875162"
+  },
+  {
+    "id": "straatsma-2020",
+    "title": "Straatsma syndrome",
+    "authors": "Gameiro Filho AR, Gameiro RR, Medina FMC",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "Revista Brasileira de Oftalmologia",
+    "citation": "79(1):66–68",
+    "year": 2020,
+    "date": "2020-01-01",
+    "doi": "10.5935/0034-7280.20200014"
+  },
+  {
+    "id": "canaliculitis-2017",
+    "title": "Relato de Caso: Canaliculite Primária",
+    "titleTranslation": "Case report: primary canaliculitis",
+    "language": "pt",
+    "authors": "Gameiro Filho AR, Gameiro RR, Lopes GJA",
+    "kind": "Case report",
+    "section": "clinical",
+    "venue": "Revista da Sociedade Portuguesa de Oftalmologia",
+    "citation": "41(1)",
+    "year": 2017,
+    "date": "2017-08-09",
+    "doi": "10.48560/rspo.9843"
+  }
+]

@@ -1,0 +1,146 @@
+---
+import Icon from './Icon.astro';
+import Sep from './Sep.astro';
+import { doiUrl, primaryUrl, pubmedUrl, type Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+  /** Show the one-line summary under the entry. */
+  summary?: boolean;
+}
+
+const { pub, summary = false } = Astro.props;
+const href = primaryUrl(pub);
+const underReview = pub.section === 'under-review';
+
+const links = [
+  ...(pub.doi ? [{ label: 'DOI', url: doiUrl(pub.doi) }] : []),
+  ...(pub.pmid ? [{ label: 'PubMed', url: pubmedUrl(pub.pmid) }] : []),
+  ...(pub.links ?? []),
+];
+---
+
+<li class="pub" id={pub.id}>
+  <h3 class="pub-title" lang={pub.language}>
+    {href ? <a href={href}>{pub.title}</a> : pub.title}
+  </h3>
+  {pub.titleTranslation && <p class="pub-translation">{pub.titleTranslation}</p>}
+  <p class="pub-authors">{pub.authors}</p>
+  <p class="pub-venue">
+    {underReview ? (
+      <span>{pub.venue}</span>
+    ) : (
+      <>
+        <cite>{pub.venue}</cite>
+        {pub.citation && <span class="pub-citation">, {pub.citation}</span>}
+        <Sep />
+        <span>{pub.year}</span>
+      </>
+    )}
+  </p>
+  <p class="pub-meta">
+    <span class="tag">{pub.kind}</span>
+    {links.map((link) => (
+      <a class="pub-link" href={link.url}>
+        {link.label}
+        <Icon name="arrow-up-right" size={12} />
+      </a>
+    ))}
+  </p>
+  {summary && pub.summary && <p class="pub-summary">{pub.summary}</p>}
+</li>
+
+<style>
+  .pub {
+    list-style: none;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .pub:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .pub-title {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+
+  .pub-title a {
+    color: var(--fg);
+    text-decoration-color: transparent;
+  }
+
+  .pub-title a:hover {
+    text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+  }
+
+  .pub-translation {
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-style: italic;
+  }
+
+  .pub-authors,
+  .pub-venue {
+    margin-top: 0.35rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .pub-venue {
+    margin-top: 0.15rem;
+  }
+
+  .pub-venue cite {
+    color: var(--fg-soft);
+    font-style: italic;
+  }
+
+  .pub-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+    margin-top: 0.65rem;
+    font-size: 0.8125rem;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--hairline);
+    color: var(--fg-soft);
+    font-weight: 550;
+    line-height: 1.5;
+  }
+
+  .pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    margin-left: 0.15rem;
+    font-weight: 550;
+    text-decoration: none;
+  }
+
+  .pub-link:hover {
+    text-decoration: underline;
+  }
+
+  .pub-summary {
+    margin-top: 0.6rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+</style>

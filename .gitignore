@@ -1,0 +1,30 @@
+# ── Dependencies and build output ──────────────────────────────────────────
+node_modules/
+dist/
+.astro/
+
+# ── Environment ────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Logs and caches ────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+.eslintcache
+.cache/
+.lighthouseci/
+coverage/
+
+# ── Hosting CLIs ───────────────────────────────────────────────────────────
+.wrangler/
+.vercel/
+.netlify/
+
+# ── OS and editors ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
