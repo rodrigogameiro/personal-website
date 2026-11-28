@@ -1,13 +1,13 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
-export type Publication = CollectionEntry<'publications'>['data'] & { id: string };
+export type Publication = CollectionEntry<'publications'>['data'];
 export type PublicationSection = Publication['section'];
 
 /** All publications, newest first. */
 export async function getPublications(): Promise<Publication[]> {
   const entries = await getCollection('publications');
   return entries
-    .map((entry) => ({ id: entry.id, ...entry.data }))
+    .map((entry) => ({ ...entry.data, id: entry.id }))
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 

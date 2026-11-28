@@ -1,6 +1,7 @@
 /**
  * Content collections. The JSON files in src/data/ are validated against these
- * schemas at build time: a typo or a missing field fails the build.
+ * schemas at build time: a missing field, or a field the schema does not list
+ * (such as a misspelled name), fails the build.
  */
 import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
@@ -10,7 +11,9 @@ const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use YYYY-MM-DD');
 
 const publications = defineCollection({
   loader: file('src/data/publications.json'),
-  schema: z.object({
+  schema: z.strictObject({
+    /** The entry's ID. The file loader also keeps it in the data checked here. */
+    id: z.string(),
     title: z.string(),
     titleTranslation: z.string().optional(),
     language: z.string().optional(),
@@ -37,7 +40,7 @@ const publications = defineCollection({
       .regex(/^10\.\d{4,9}\/\S+$/)
       .optional(),
     pmid: z.string().regex(/^\d+$/).optional(),
-    links: z.array(z.object({ label: z.string(), url: z.url() })).optional(),
+    links: z.array(z.strictObject({ label: z.string(), url: z.url() })).optional(),
     summary: z.string().optional(),
   }),
 });
