@@ -1,6 +1,6 @@
 # Rodrigo Gameiro — personal website
 
-Source code of [rodrigogameiro.com](https://rodrigogameiro.com), the personal academic website of **Rodrigo Gameiro, MD, MPH**, a physician and researcher at Harvard Medical School who builds and evaluates AI for clinical decision support.
+Source code of [rodrigogameiro.com](https://rodrigogameiro.com), the personal academic website of **Rodrigo Gameiro, MD, MPH**, a physician and Harvard Medical School researcher who builds clinical AI and studies how it is tested, cleared and used.
 
 ## Highlights
 

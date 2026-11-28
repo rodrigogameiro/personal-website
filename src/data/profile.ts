@@ -113,13 +113,13 @@ export const profiles: readonly Profile[] = [
 export const bio = {
   /** One sentence, used for meta descriptions and link previews. */
   description:
-    'Rodrigo Gameiro, MD, MPH, is a physician and researcher at Harvard Medical School who builds and evaluates AI for clinical decision support.',
+    'Rodrigo Gameiro, MD, MPH, is a physician and Harvard Medical School researcher who builds clinical AI and studies how it is tested, cleared and used.',
 
   /** First person, for the home page. */
   home: [
-    "I am a physician and a researcher at Harvard Medical School's Department of Biomedical Informatics, where I work with Isaac Kohane. I build and evaluate AI systems for clinical decision support.",
-    'Clinical AI is often tested under conditions unlike the ones it is used in: on patients already suspected of the disease, with the model working alone, and often cleared by comparison with earlier devices. I study what it takes to trust these systems in ordinary practice, and I treat that as one engineering problem: how the tools are tested, how they are combined, how they are cleared, and how clinicians work with them.',
-    "Before Harvard Medical School, I was an associate researcher at MIT's Laboratory for Computational Physiology with Leo Anthony Celi, where I was first author of the Data Artifacts Glossary, an open repository of known biases in health datasets. Earlier, I trained in emergency medicine and worked as an attending physician.",
-    'I hold an MD, an MPH from the Harvard School of Public Health, and a law degree with a concentration in international law, human rights and comparative constitutional law.',
+    'I am a physician and a researcher at Harvard Medical School, where I work with Isaac Kohane. I build AI for clinical decision support and test whether it holds up with the patients it is meant for.',
+    'Clinical AI is usually built in relay. One group gathers the data, another trains the model, a third scores it on held-out records, a regulator clears it on that evidence, and only then does it reach a clinic that none of those steps examined. The weaknesses compound at the handoffs. That is my focus: how the tools are developed, tested, combined and cleared, and how clinicians work with them.',
+    "I came to this from the bedside. I trained in emergency medicine and worked as an attending physician, and I studied law alongside medicine to understand how systems produce the outcomes they do. Before Harvard Medical School, I was an associate researcher at MIT's Laboratory for Computational Physiology with Leo Anthony Celi, where I was first author of the Data Artifacts Glossary, an open repository of known biases in health datasets.",
+    'I hold an MD, an MPH from the Harvard School of Public Health, and a law degree with a concentration in international law and human rights. I also serve as a guest editor for PLOS Digital Health and review for NeurIPS and ICML.',
   ],
 } as const;
