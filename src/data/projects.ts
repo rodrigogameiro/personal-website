@@ -22,7 +22,7 @@ export interface WorkTheme {
 export const workThemes: readonly WorkTheme[] = [
   {
     id: 'clinical-decision-support',
-    title: 'Clinical decision support',
+    title: 'Clinical Decision Support',
     icon: 'pulse',
     tone: 'blue',
     projects: [
@@ -35,31 +35,31 @@ export const workThemes: readonly WorkTheme[] = [
   },
   {
     id: 'ai-regulation',
-    title: 'AI regulation',
+    title: 'AI Regulation',
     icon: 'scale',
     tone: 'violet',
     projects: [
       {
         id: 'ai-devices-fda',
-        title: 'AI medical devices and the FDA',
+        title: 'Regulation of AI Medical Devices',
         body: 'I trace how AI-enabled medical devices are cleared for the US market, and what those clearances rest on.',
       },
       {
         id: 'ai-drivers-license',
-        title: "A driver's license for AI",
+        title: "A Driver's License for AI",
         body: 'I explore whether licensing AI, much as we license drivers, is a workable way to regulate it.',
       },
     ],
   },
   {
     id: 'human-ai-interaction',
-    title: 'Human-AI interaction',
+    title: 'Human-AI Interaction',
     icon: 'human-ai',
     tone: 'teal',
     projects: [
       {
         id: 'ai-recommendation-timing',
-        title: 'When should an AI recommendation appear?',
+        title: 'The Effect of AI on Decision Making',
         body: "I study how the timing of an AI recommendation changes people's reliance on it.",
       },
     ],
