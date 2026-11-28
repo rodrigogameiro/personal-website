@@ -12,7 +12,7 @@ export const siteConfig = {
    * Last meaningful content edit (ISO 8601). Update by hand when the content
    * changes; it feeds the footer and the ProfilePage `dateModified`.
    */
-  dateModified: '2026-11-26',
+  dateModified: '2026-11-27',
   /** Public source repository, linked from the footer. */
   repository: 'https://github.com/rodrigogameiro/personal-website',
   twitterHandle: '@rrgameiro',
